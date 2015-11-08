@@ -1,11 +1,11 @@
 {
-  "author": "Nicolas Herment <nherment@gmail.com>",
-  "name": "nmea-0183",
-  "description": "an NMEA-0183 parser/encoder library, cloned from David Howard",
-  "version": "0.0.7",
+  "author": "Niels Schelbach (niels.schelbach@rocketbase.io)",
+  "name": "libnmea",
+  "description": "an NMEA-0183 parser/encoder library, cloned from Nicolas Herment",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/nherment/node-nmea.git"
+    "url": "git://github.com/rocketbase-io/node-nmea.git"
   },
   "scripts": {
     "test": "mocha"
