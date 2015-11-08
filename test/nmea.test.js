@@ -6,6 +6,45 @@ var assert = require('assert');
 
 describe('nmea', function () {
     'use strict';
+    //it('compute checksum', function() {
+    //   console.log('the checksum: %s',Helper.computeChecksum('$YXMTW,22.6,C'));
+    //});
+
+    it("parse MTW with checksum", function () {
+        var s = "YXMTW";
+        var n = nmea.parse("$YXMTW,22.6,C*14");
+        assert.ok(n !== null, 'parser result not null');
+        if (n !== null) {
+            assert.ok(n.id === s, s + '!== ' + n.id);
+            assert.strictEqual(n.degree, 22.6, 'degree');
+            assert.strictEqual(n.unit, 'C', 'unit');
+        }
+    });
+
+    it("parse DBT with checksum", function () {
+        var s = "SDDBT";
+        var n = nmea.parse("$SDDBT,99.1,f,22.5,M,45.2,F*31");
+        assert.ok(n !== null, 'parser result not null');
+        if (n !== null) {
+            assert.ok(n.id === s, s + '!== ' + n.id);
+            assert.strictEqual(n.feet, 99.1, 'feet');
+            assert.strictEqual(n.meters, 22.5, 'meters');
+            assert.strictEqual(n.fathoms, 45.2, 'fathoms');
+        }
+    });
+
+    it("parse DPT with checksum", function () {
+        var s = "SDDPT";
+        var n = nmea.parse("$SDDPT,4.6,2.5*52");
+        assert.ok(n !== null, 'parser result not null');
+        if (n !== null) {
+            assert.ok(n.id === s, s + '!== ' + n.id);
+            assert.strictEqual(n.depth, 4.6, 'feet');
+            assert.strictEqual(n.offset, 2.5, 'meters');
+        }
+    });
+
+
     it("parse GPGGA with checksum", function () {
         var s = "GPGGA";
         var n = nmea.parse("$GPGGA,123519,4807.038,N,01131.324,E,1,08,0.9,545.4,M,46.9,M, , *42");
